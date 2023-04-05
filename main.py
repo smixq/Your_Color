@@ -25,7 +25,12 @@ def index():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        return redirect('/')
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.email == form.email.data).first()
+        if user:
+            if user.check_password(form.password.data):
+                print(11213123)
+                return redirect('/')
     return render_template('login.html', title='Авторизация', form=form)
 
 
@@ -50,6 +55,8 @@ def reqister():
         db_sess.commit()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
+
+
 
 
 if __name__ == '__main__':
