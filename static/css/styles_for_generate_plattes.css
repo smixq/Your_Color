@@ -10,9 +10,25 @@ content {
     height: 100vh;
     display: flex;
 }
+
 ul {
     list-style: none;
 }
+
+li {
+    padding-top: 15px;
+}
+
+a {
+    text-decoration: none;
+    color:rgba(240, 248, 255, 0.974);
+}
+
+a:hover {
+    color: rgba(240, 248, 255, 0.745);
+}
+
+
 nav {
     display: flex;
     flex: 1;
@@ -20,7 +36,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     /* justify-content: flex-end; */
-    background-color: #db326c;
+    background-color: hsla(336, 100%, 3%, 0.885);
     outline: 5px solid;
 }
 
@@ -49,6 +65,7 @@ nav {
 .nav_action_item {
     margin-left: 30px;
     padding-right: 10px;
+    display: inline-block;
 }
 
 .col {
