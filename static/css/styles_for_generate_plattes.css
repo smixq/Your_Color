@@ -32,6 +32,11 @@ nav {
     font-size: 40px;
     flex-grow: 1;
 }
+
+.nav_item {
+    display: inline-block;
+}
+
 .nav_actions {
     display: flex;
     /* flex: 1; */
