@@ -26,8 +26,10 @@
 
 • Страница с лучшими палитрами. Сдесь будут находиться самые залайканые палитры.
 
+• Страница пользователя
+
 Структура базы даных:
 
-Поля таблицы User: id, login, password.
+Поля таблицы User: id, login, password, img.
 
-Поля таблицы plattes: id, colors, likes, id users.
+Поля таблицы plattes: id, colors, likes, id_users.
