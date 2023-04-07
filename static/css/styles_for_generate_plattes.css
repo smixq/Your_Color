@@ -37,7 +37,8 @@ nav {
     align-items: center;
     /* justify-content: flex-end; */
     background-color: hsla(336, 100%, 3%, 0.885);
-    outline: 5px solid;
+    /*outline: 5px solid;*/
+    padding-left: 50px;
 }
 
 .nav_list {
@@ -59,11 +60,10 @@ nav {
     justify-content: space-around;
     flex-direction: row;
     font-size: 40px;
-    
 }
 
 .nav_action_item {
-    margin-left: 30px;
+    margin-left: 10px;
     padding-right: 10px;
     font-size: 20px;
     display: inline-block;
