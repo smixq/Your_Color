@@ -28,6 +28,17 @@ a:hover {
     color: rgba(240, 248, 255, 0.745);
 }
 
+.authorization h1 {
+    text-align: center;
+    margin-top: 100px;
+}
+
+form {
+    width: 300px;
+    height: 300px;
+    margin-left: 82vh;
+    margin-top: 30px;
+}
 
 nav {
     display: flex;
@@ -36,7 +47,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     /* justify-content: flex-end; */
-    background-color: hsla(336, 100%, 3%, 0.885);
+    background-color: hsla(336, 100%, 3%, 0.853);
     /*outline: 5px solid;*/
     padding-left: 50px;
 }
@@ -106,4 +117,8 @@ nav {
     background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
     
+}
+
+.btn-primary {
+    width: 300px;
 }
