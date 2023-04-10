@@ -33,11 +33,23 @@ a:hover {
     margin-top: 100px;
 }
 
+.authorization{
+    text-align: center;
+}
+
 form {
     width: 300px;
     height: 300px;
-    margin-left: 82vh;
+    margin: 0 auto;
     margin-top: 30px;
+}
+
+.profile_avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 3px solid white;
+
 }
 
 nav {
@@ -49,7 +61,7 @@ nav {
     /* justify-content: flex-end; */
     background-color: hsla(336, 100%, 3%, 0.853);
     /*outline: 5px solid;*/
-    padding-left: 50px;
+    padding-left: 40px;
 }
 
 .nav_list {
@@ -57,7 +69,7 @@ nav {
     /* flex: 1; */
     justify-content: space-around;
     flex-direction: row;
-    font-size: 20px;
+    font-size: 30px;
     flex-grow: 1;
 }
 
@@ -76,7 +88,7 @@ nav {
 .nav_action_item {
     margin-left: 10px;
     padding-right: 10px;
-    font-size: 20px;
+    font-size: 30px;
     display: inline-block;
 }
 

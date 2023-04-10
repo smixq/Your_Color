@@ -41,12 +41,27 @@
                 </li>
             </ul>
             <ul class="nav_actions">
+                {% if current_user.is_authenticated %}
                 <li class="nav_action_item">
-                    <a href="" class="nav_action_item_link">Регистрация</a>
+                    <a href="/logout" class="nav_action_item_link">Выйти</a>
                 </li>
                 <li class="nav_action_item">
-                    <a href="" class="nav_action_item_link">Вход</a>
+                    <a href="" class="nav_action_item_link">Профиль
+                    {% if current_user.avatar %}
+                        <img src="" alt="1">
+                    {% else %}
+                        <img class="profile_avatar" src="{{ url_for('static', filename='img/icon.svg') }}" alt="1">
+                    {% endif %}
+                    </a>
                 </li>
+                {% else %}
+                <li class="nav_action_item">
+                    <a href="{{url_for('reqister')}}" class="nav_action_item_link">Регистрация</a>
+                </li>
+                <li class="nav_action_item">
+                    <a href="/login" class="nav_action_item_link">Вход</a>
+                </li>
+                {% endif %}
             </ul>
         </nav>
     </header>
