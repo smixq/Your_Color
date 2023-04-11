@@ -7,7 +7,7 @@
 /* это колохоз потом надо править */
 content {
     font-family: 'Roboto', sans-serif;
-    height: 100vh;
+    height: 90vh;
     display: flex;
 }
 
@@ -33,9 +33,7 @@ a:hover {
     margin-top: 100px;
 }
 
-.authorization{
-    text-align: center;
-}
+
 
 form {
     width: 300px;
@@ -62,6 +60,10 @@ nav {
     background-color: hsla(336, 100%, 3%, 0.853);
     /*outline: 5px solid;*/
     padding-left: 40px;
+}
+
+.head_authorization {
+    text-align: center;
 }
 
 .nav_list {

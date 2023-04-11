@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -28,7 +28,7 @@
         <nav>
             <ul class="nav_list">
                 <li class="nav_item">
-                    <a href="" class="nav_link">text</a>
+                    <a href="/" class="nav_link">Генератор палитр</a>
                 </li>
                 <li class="nav_item">
                     <a href="" class="nav_link">text</a>
@@ -46,9 +46,9 @@
                     <a href="/logout" class="nav_action_item_link">Выйти</a>
                 </li>
                 <li class="nav_action_item">
-                    <a href="" class="nav_action_item_link">Профиль
+                    <a href="/profile" class="nav_action_item_link">Профиль
                     {% if current_user.avatar %}
-                        <img src="" alt="1">
+                        <img src="{{ url_for('userava') }}" alt="1" class="profile_avatar">
                     {% else %}
                         <img class="profile_avatar" src="{{ url_for('static', filename='img/icon.svg') }}" alt="1">
                     {% endif %}
