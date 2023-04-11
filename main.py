@@ -32,6 +32,16 @@ def index():
     return render_template("generate_plattes.html", **params)
 
 
+@app.route("/favourite")
+def favourite():
+    return render_template("favourite.html")
+
+
+@app.route("/best")
+def best():
+    return render_template("best.html")
+
+
 @app.route('/userava')
 @login_required
 def userava():
@@ -63,8 +73,6 @@ def profile():
         if file:
             user.avatar = file.read()
             db_sess.commit()
-
-
 
     return render_template('profile.html', title='Профиль', form=form)
 
