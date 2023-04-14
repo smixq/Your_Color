@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<content>
+<section class="content">
     <div class="col">
         <h2 data-type="copy"></h2>
         <button data-type="lock">
@@ -38,6 +38,6 @@
             <i class="fa-solid fa-lock-open" data-type="lock"></i>
         </button>
     </div>
-</content>
+</section>
 <script src="{{ url_for('static', filename='js/app.js')}}"></script>
 {% endblock %}

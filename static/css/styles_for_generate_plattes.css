@@ -4,28 +4,31 @@
     box-sizing: border-box;
     
 }
-/* это колохоз потом надо править */
-content {
+
+html {
     font-family: 'Roboto', sans-serif;
-    height: 89vh;
+}
+/* это колохоз потом надо править */
+.content {
+    
+    height: 90vh;
     display: flex;
 }
 
+.header {
+    height: 10vh;
+}
 ul {
     list-style: none;
 }
 
 li {
-    padding-top: 15px;
+    /*padding-top: 15px;*/
 }
 
 a {
     text-decoration: none;
     color:rgba(240, 248, 255, 0.974);
-}
-
-a:hover {
-    color: rgba(240, 248, 255, 0.745);
 }
 
 .authorization h1 {
@@ -39,6 +42,7 @@ form {
     margin: 0 auto;
     margin-top: 30px;
 }
+
 
 .profile_avatar {
     width: 50px;
@@ -67,19 +71,33 @@ nav {
 
 .nav_list {
     display: flex;
+    align-items: center;
     /* flex: 1; */
-    justify-content: space-around;
+    justify-content: start;
     flex-direction: row;
-    font-size: 30px;
+    font-size: 22px;
     flex-grow: 1;
 }
 
 .nav_item {
     display: inline-block;
+    padding: 20px 5px;
+}
+
+.nav_link {
+    text-transform: lowercase;
+    font-variant: small-caps;
+    padding: 20px 10px 20px 10px;
+}
+
+.nav_link:hover {
+    /*color: rgba(240, 248, 255, 0.877);*/
+    background-color: black;
 }
 
 .nav_actions {
     display: flex;
+    align-items: center;
     /* flex: 1; */
     justify-content: space-around;
     flex-direction: row;
@@ -89,12 +107,20 @@ nav {
 .nav_action_item {
     margin-left: 10px;
     padding-right: 10px;
-    font-size: 30px;
+    font-size: 22px;
     display: inline-block;
+    text-transform: lowercase;
+    font-variant: small-caps;
 }
 
 .form-control {
     box-shadow:0 0 15px 4px rgba(0, 0, 0, 0.137);
+}
+
+.nav_action_item_link {
+    padding: 10px 20px;
+    background-color: rgba(64, 124, 176, 0.332);
+    border-radius: 25px;
 }
 
 .col {
