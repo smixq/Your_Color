@@ -10,13 +10,12 @@ html {
 }
 /* это колохоз потом надо править */
 .content {
-    
-    height: 90vh;
+    height: 93vh;
     display: flex;
 }
 
 .header {
-    height: 10vh;
+    /*height: 10vh;*/
 }
 ul {
     list-style: none;
@@ -62,6 +61,7 @@ nav {
     background-color: hsla(336, 100%, 3%, 0.853);
     /*outline: 5px solid;*/
     padding-left: 40px;
+    height: 7vh;
 }
 
 .head_authorization {
