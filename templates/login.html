@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="head_authorization">Авторизация</h1>
+<!-- <h1 class="head_authorization">Авторизация</h1>
 <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
     <p>
@@ -22,5 +22,22 @@
     </p>
     <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
     <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-</form>
+</form> -->
+
+<div class="reg_body">
+<div class="form">
+    <div class="title">Авторизация</div>
+    <div class="input-container ic1">
+      <input id="firstname" class="input" type="text" placeholder=" " />
+      <div class="cut"></div>
+      <label for="firstname" class="placeholder">Почта</label>
+    </div>
+    <div class="input-container ic2">
+      <input id="lastname" class="input" type="text" placeholder=" " />
+      <div class="cut"></div>
+      <label for="lastname" class="placeholder">Пароль</label>
+    </div>
+    <button type="text" class="submit">submit</button>
+</div>
+</div>
 {% endblock %}
