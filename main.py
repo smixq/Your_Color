@@ -9,6 +9,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, \
     current_user
 from data.user import User
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'asffsdfSDFASFKJFSADHFGJSDJFG'
 login_manager = LoginManager()
@@ -30,6 +31,17 @@ def main():
 def index():
     params = {'link': 'css/styles_for_generate_plattes.css'}
     return render_template("generate_plattes.html", **params)
+
+
+@app.route("/add-like", methods=['POST'])
+@login_required
+def add_like():
+
+    if request.method == 'POST':
+        if request.method == 'POST':
+            print(request.json)
+    return ''
+
 
 
 @app.route("/favourite")

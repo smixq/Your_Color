@@ -45,7 +45,7 @@
                 <li class="nav_action_item">
                     <a href="/logout" class="nav_action_item_link">Выйти</a>
                 </li>
-                <li class="nav_action_item" data-user-id="{{ current_user_id }}">
+                <li class="nav_action_item" data-type="{{ current_user.id }}">
                     <a href="/profile" class="nav_action_item_link">Профиль
                     {% if current_user.avatar %}
                         <img src="{{ url_for('userava') }}" alt="1" class="profile_avatar">

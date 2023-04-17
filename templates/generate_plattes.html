@@ -23,12 +23,9 @@
         <button data-type="lock">
             <i class="fa-solid fa-lock-open" data-type="lock"></i>
         </button>
-    </div>
 
-    <div class="col">
-        <h2 data-type="copy"></h2>
-        <button data-type="lock">
-            <i class="fa-solid fa-lock-open" data-type="lock"></i>
+        <button data-type="like_btn">
+        <i class="like fa-regular fa-heart"></i>
         </button>
     </div>
 
@@ -38,6 +35,14 @@
             <i class="fa-solid fa-lock-open" data-type="lock"></i>
         </button>
     </div>
+
+    <div class="col">
+        <h2 data-type="copy"></h2>
+        <button data-type="lock">
+            <i class="fa-solid fa-lock-open" data-type="lock"></i>
+        </button>
+    </div>
+
 </section>
 <script src="{{ url_for('static', filename='js/app.js')}}"></script>
 {% endblock %}
