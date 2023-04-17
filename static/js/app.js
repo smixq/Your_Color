@@ -1,5 +1,33 @@
-
+let like = document.querySelector('.like')
 const col = document.querySelectorAll('.col')
+
+
+like.addEventListener('click', (event) => {
+    let el = event.target
+    el.classList.toggle("fa-solid")
+    el.classList.toggle('fa-regular')
+    let xhr = new XMLHttpRequest();
+    let id = el.dataset.id
+    id = 1
+    console.log(id)
+    let user_id = document.querySelectorAll('.nav_action_item')[1].dataset.type
+    console.log(user_id)
+    xhr.open("POST", '/add-like')
+    xhr.withCredentials = true
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    let colors = []
+    col.forEach((col, index)=>{
+    let text = col.querySelector('h2')
+    colors.push(text.textContent)
+    })
+    console.log(colors)
+//    console.log(xhr.getResponseHeader('Content-Type'))
+    xhr.send(JSON.stringify({"user_id": user_id, 'colors':colors}))
+//    console.log(xhr.getResponseHeader('Content-Type'))
+})
+
+
+
 document.addEventListener('click', (evt)=>{
     //evt.preventDefault()
     const type = evt.target.dataset.type

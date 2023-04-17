@@ -8,6 +8,7 @@ likes.forEach((like)=>{
         let xhr = new XMLHttpRequest();
         let id = el.dataset.id
         xhr.open("POST", `sute.ru/add-like`)
+        xhr.withCredentials = true
         xhr.send({id: id, user_id: user_id})
     })
 })
