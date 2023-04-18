@@ -12,7 +12,7 @@ like.addEventListener('click', (event) => {
     console.log(id)
     let user_id = document.querySelectorAll('.nav_action_item')[1].dataset.type
     console.log(user_id)
-    xhr.open("POST", '/add-like')
+    xhr.open("POST", '/add-favourite')
     xhr.withCredentials = true
     xhr.setRequestHeader('Content-Type', 'application/json')
     let colors = []

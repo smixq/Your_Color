@@ -8,6 +8,7 @@ from form.profile import ProfileForm
 from flask_login import LoginManager, login_user, login_required, logout_user, \
     current_user
 from data.user import User
+from data.plattes import Saved_plattes
 
 
 app = Flask(__name__)
@@ -33,14 +34,25 @@ def index():
     return render_template("generate_plattes.html", **params)
 
 
-@app.route("/add-like", methods=['POST'])
+@app.route("/add-favourite", methods=['POST'])
 @login_required
-def add_like():
-
+def add_favourite():
+    db_session.global_init("db/blogs.db")
+    db_sess = db_session.create_session()
     if request.method == 'POST':
         if request.method == 'POST':
-            print(request.json)
-    return ''
+            data = request.json
+            if data:
+                plattes = Saved_plattes()
+                user_id = data['user_id']
+                colors = ''.join(data['colors'])
+                plattes.colors = colors
+                plattes.id_user = int(user_id)
+                print(user_id)
+                db_sess.add(plattes)
+                db_sess.commit()
+
+    return
 
 
 
