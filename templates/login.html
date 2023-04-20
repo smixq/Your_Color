@@ -1,33 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- <h1 class="head_authorization">Авторизация</h1>
-<form class="form" action="" method="post" novalidate>
+<div class="reg_body">
+<form class="form form-short" action="" method="post" novalidate>
+    <div class="title">Авторизация</div>
     {{ form.hidden_tag() }}
-    <p>
-        {{ form.email(class="input", placeholder="Почта") }}
-        {{ form.email.label(class='placeholder')}}
+    <div class="input-container ic1">
+        {{ form.email(id="firstname", class="input", type="text", placeholder=" ") }}
+        <div class="cut cut-short"></div>
+        {{ form.email.label(for="firstname", class="placeholder")}}
 
         {% for error in form.email.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
     </div>
     {% endfor %}
-    </p>
-    <p>
-        {{ form.password(class="input", type="password", placeholder="Пароль") }}
-        {{ form.password.label(class='placeholder')}}
+    </div>
+    <div class="input-container ic2">
+        {{ form.password(id="lastname", class="input", type="text", placeholder=" ") }}
+         <div class="cut"></div>
+        {{ form.password.label(for="lastname", class="placeholder")}}
         {% for error in form.password.errors %}
     <div class="alert alert-danger" role="alert">
         {{ error }}
     </div>
     {% endfor %}
-    </p>
+    </div>
     <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-</form> -->
+    <p>{{ form.submit(type="text", class="submit") }}</p>
+</form>
+</div>
 
-<div class="reg_body">
+<!-- <div class="reg_body">
 <form class="form form-short">
     <div class="title">Авторизация</div>
     <div class="input-container ic1">
@@ -43,4 +47,4 @@
     <button type="text" class="submit">submit</button>
 </form>
 </div>
-{% endblock %}
+{% endblock %} -->
