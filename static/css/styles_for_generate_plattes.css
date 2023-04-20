@@ -11,12 +11,13 @@ html {
 }
 /* это колохоз потом надо править */
 .content {
-    height: 90vh;
+    height: 91vh;
     display: flex;
 }
 
 .header {
     height: 9vh;
+    background-color: hsla(336, 100%, 3%, 0.853);
 }
 
 ul {
@@ -32,10 +33,10 @@ a {
     color:rgba(240, 248, 255, 0.974);
 }
 
-.authorization h1 {
+/*.authorization h1 {
     text-align: center;
     margin-top: 100px;
-}
+}*/
 
 form {
     width: 300px;
@@ -60,7 +61,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     /* justify-content: flex-end; */
-    background-color: hsla(336, 100%, 3%, 0.853);
+    /*background-color: hsla(336, 100%, 3%, 0.853);*/
     /*outline: 5px solid;*/
     padding-left: 40px;
 }
@@ -88,12 +89,16 @@ nav {
 .nav_link {
     text-transform: lowercase;
     font-variant: small-caps;
-    padding: 20px 10px 20px 10px;
+    padding: 20px 10px 22px 10px;
 }
 
 .nav_link:hover {
     /*color: rgba(240, 248, 255, 0.877);*/
     background-color: black;
+}
+
+.nav_link_active {
+    background-color: #9e1390e3;
 }
 
 .nav_actions {
@@ -120,7 +125,7 @@ nav {
 
 .nav_action_item_link {
     padding: 10px 20px;
-    background-color: rgba(64, 124, 176, 0.332);
+    background-color: #9e1390e3;
     border-radius: 25px;
 }
 
@@ -179,6 +184,10 @@ nav {
     padding: 20px;
     width: 320px;
 }
+
+.form-short {
+    height: 420px;
+}
   
 .title {
     color: #eee;
@@ -186,15 +195,16 @@ nav {
     font-size: 36px;
     font-weight: 600;
     margin-top: 30px;
+    text-align: center;
 }
   
-.subtitle {
+/*.subtitle {
     color: #eee;
     font-family: sans-serif;
     font-size: 16px;
     font-weight: 600;
     margin-top: 10px;
-}
+}*/
   
 .input-container {
     height: 50px;
@@ -232,11 +242,15 @@ nav {
     top: -20px;
     transform: translateY(0);
     transition: transform 200ms;
-    width: 76px;
+    width: 62px;
 }
   
+.cut-long {
+    width: 115px;
+}
+
 .cut-short {
-    width: 50px;
+    width: 55px;
 }
   
 .input:focus ~ .cut,
@@ -252,7 +266,7 @@ nav {
     pointer-events: none;
     position: absolute;
     transform-origin: 0 50%;
-    transition: transform 200ms, color 200ms;
+    transition: transform 100ms, color 200ms;
     top: 20px;
 }
   
