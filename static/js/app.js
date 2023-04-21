@@ -4,15 +4,9 @@ const col = document.querySelectorAll('.col')
 
 like.addEventListener('click', (event) => {
     let el = event.target
-    el.classList.toggle("fa-solid")
-    el.classList.toggle('fa-regular')
     let xhr = new XMLHttpRequest();
-    let id = el.dataset.id
-    id = 1
-    console.log(id)
     let user_id = document.querySelectorAll('.nav_action_item')[1].dataset.type
-    console.log(user_id)
-    xhr.open("POST", '/add-favourite')
+    xhr.open("POST", '/save-palette')
     xhr.withCredentials = true
     xhr.setRequestHeader('Content-Type', 'application/json')
     let colors = []
@@ -20,9 +14,27 @@ like.addEventListener('click', (event) => {
     let text = col.querySelector('h2')
     colors.push(text.textContent)
     })
-    console.log(colors)
+    let isDel
+    if (el.classList.contains('fa-solid')) {
+        isDel = true
+
+    }
+    else {
+
+        isDel = false
+    }
+//    console.log(isDel)
+    el.classList.toggle("fa-solid")
+    el.classList.toggle('fa-regular')
+    xhr.send(JSON.stringify({"user_id": user_id, 'colors': colors, 'is_del': isDel}))
+
+//    let id = el.dataset.id
+//    id = 1
+
+
+
 //    console.log(xhr.getResponseHeader('Content-Type'))
-    xhr.send(JSON.stringify({"user_id": user_id, 'colors':colors}))
+
 //    console.log(xhr.getResponseHeader('Content-Type'))
 })
 
@@ -54,6 +66,10 @@ document.addEventListener('keydown', (evt)=>{
 
     if(evt.code === 'Space'){
         evt.preventDefault()
+    if (like.classList.contains('fa-solid')) {
+        like.classList.toggle('fa-solid')
+        like.classList.toggle('fa-regular')
+    }
         setRandomColors()
     }
 })

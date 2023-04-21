@@ -15,6 +15,19 @@ html {
     display: flex;
 }
 
+.palettes_content{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+
+.palettes{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
 .header {
     height: 9vh;
     background-color: hsla(336, 100%, 3%, 0.853);

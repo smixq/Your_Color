@@ -60,3 +60,6 @@
 
 
 ![Снимок экрана 2023-04-18 194459](https://user-images.githubusercontent.com/118548569/232847183-fb8e932c-bb4c-44b0-89f4-3a55fe4385c8.png)
+
+
+Презентация: https://docs.google.com/presentation/d/1To2cObsoISUKh0MekPjwwSMZqT_FXm9x/edit#slide=id.g1fb44484911_1_0

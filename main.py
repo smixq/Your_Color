@@ -8,8 +8,9 @@ from form.profile import ProfileForm
 from flask_login import LoginManager, login_user, login_required, logout_user, \
     current_user
 from data.user import User
-from data.plattes import Saved_plattes
-
+from data.saved_palettes import Saved_plattes
+from data.liked_palettes import Liked_palettes
+import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'asffsdfSDFASFKJFSADHFGJSDJFG'
@@ -31,10 +32,28 @@ def main():
 @app.route("/")
 def index():
     params = {'link': 'css/styles_for_generate_plattes.css'}
-    return render_template("generate_plattes.html", **params)
+    return render_template("generate_palettes.html", **params)
 
 
-@app.route("/add-favourite", methods=['POST'])
+@app.route("/delete-palettes", methods=['POST'])
+@login_required
+def delete_palettes():
+    db_session.global_init("db/blogs.db")
+    db_sess = db_session.create_session()
+
+    if request.method == 'POST':
+        if request.method == 'POST':
+            data = request.json
+            if data:
+                palette = db_sess.query(Saved_plattes).filter(
+                    Saved_plattes.id == data['id_palettes']).first()
+                db_sess.delete(palette)
+                db_sess.commit()
+
+    return ''
+
+
+@app.route("/save-palette", methods=['POST'])
 @login_required
 def add_favourite():
     db_session.global_init("db/blogs.db")
@@ -46,24 +65,88 @@ def add_favourite():
                 plattes = Saved_plattes()
                 user_id = data['user_id']
                 colors = ''.join(data['colors'])
-                plattes.colors = colors
-                plattes.id_user = int(user_id)
-                print(user_id)
-                db_sess.add(plattes)
-                db_sess.commit()
+                if data['is_del']:
+                    user = db_sess.query(Saved_plattes).filter(
+                        Saved_plattes.id_user == user_id).filter(
+                        Saved_plattes.colors == ''.join(data['colors'])).first()
+                    db_sess.delete(user)
+                    db_sess.commit()
+                else:
+                    plattes.colors = colors
+                    plattes.id_user = int(user_id)
+                    db_sess.add(plattes)
+                    db_sess.commit()
+    return ''
 
-    return
+
+@app.route("/liked_palettes", methods=['POST'])
+@login_required
+def liked_palettes():
+    db_session.global_init("db/blogs.db")
+    db_sess = db_session.create_session()
+    if request.method == 'POST':
+        if request.method == 'POST':
+            data = request.json
+            if data:
+                palettes = Liked_palettes()
+                user_id = data['user_id']
+                id_palette = data['']
+                if data['is_del']:
+                    user = db_sess.query(Liked_palettes).filter(
+                        Liked_palettes.id_user == user_id).filter(
+                        Saved_plattes.colors == ''.join(data['colors'])).first()
+                    db_sess.delete(user)
+                    db_sess.commit()
+                else:
+                    palettes.colors = colors
+                    palettes.id_user = int(user_id)
+                    db_sess.add(palettes)
+                    db_sess.commit()
+    return ''
 
 
-
-@app.route("/favourite")
-def favourite():
-    return render_template("favourite.html")
+@app.route("/saved")
+@login_required
+def saved():
+    db_session.global_init("db/blogs.db")
+    db_sess = db_session.create_session()
+    user = db_sess.query(User).filter(User.id == current_user.id).first()
+    palettes = db_sess.query(Saved_plattes).filter(Saved_plattes.id_user == user.id).all()
+    colors_hash = []
+    pallets_ids = []
+    flag = False
+    for color in palettes:
+        pallets_ids.append(color.id)
+        if color.colors.split('#'):
+            colors_hash.append(color.colors.split('#')[1:])
+            flag = True
+    if flag:
+        length = len(colors_hash[0])
+    else:
+        length = 0
+    return render_template("saved.html", colors_hash=colors_hash, palettes_ids=pallets_ids,
+                           len_colors=len(colors_hash), len_colors_elements=length)
 
 
 @app.route("/best")
 def best():
-    return render_template("best.html")
+    db_session.global_init("db/blogs.db")
+    db_sess = db_session.create_session()
+    palettes = db_sess.query(Saved_plattes).filter(Saved_plattes.date >= datetime.datetime.now() - datetime.timedelta(days=7)).all()
+    colors_hash = []
+    palettes_ids = []
+    flag = False
+    for color in palettes:
+        palettes_ids.append(color.id)
+        if color.colors.split('#'):
+            colors_hash.append(color.colors.split('#')[1:])
+            flag = True
+    if flag:
+        length = len(colors_hash[0])
+    else:
+        length = 0
+    return render_template("best.html", colors_hash=colors_hash, palettes_ids=palettes_ids,
+                           len_colors=len(colors_hash), len_colors_elements=length )
 
 
 @app.route('/userava')
@@ -79,6 +162,7 @@ def userava():
 
 
 @app.route("/profile", methods=['GET', 'POST'])
+@login_required
 def profile():
     form = ProfileForm()
     if form.validate_on_submit():
