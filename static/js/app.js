@@ -66,9 +66,9 @@ document.addEventListener('keydown', (evt)=>{
 
     if(evt.code === 'Space'){
         evt.preventDefault()
-    if (like.classList.contains('fa-solid')) {
-        like.classList.toggle('fa-solid')
-        like.classList.toggle('fa-regular')
+    if (like.classList.contains('fas')) {
+        like.classList.toggle('fas')
+        like.classList.toggle('far')
     }
         setRandomColors()
     }

@@ -2,18 +2,17 @@
 
 {% block content %}
 <div class="palettes_content" id="best_content">
-    {% for i in range(len_colors) %}
-    <div class="palettes" id="{{ palettes_ids[i] }}">
-        {% for j in range(len_colors_elements) %}
-        <div class="palette_col" style="background: #{{ colors_hash[i][j] }}">
-            #{{ colors_hash[i][j] }}
-
+    {% for keys in palettes_ids.keys %}
+    <div class="palettes" id="{{ keys }}">
+        {% for j in range(palettes_ids[keys]) %}
+        <div class="palette_col" style="background: #{{ j }}">
+            #{{ j }}
         </div>
         {% endfor %}
-        {% if palettes_ids[i] in liked_paletes %}
-        <i class="like fa-regular fa-heart" data-id="{{ palettes_ids[i] }}"></i>
+        {% if keys in liked_paletes %}
+        <i class="like fa-solid fa-heart" data-id="{{ palettes_ids[i] }}">{{ count_liked_palettes[keys] }}</i>
         {% else %}
-        <i class="like fa-solid fa-heart" data-id="{{ palettes_ids[i] }}"></i>
+        <i class="like fa-regular fa-heart" data-id="{{ palettes_ids[i] }}">{{ count_liked_palettes[keys] }}</i>
         {% endif %}
     </div>
 
