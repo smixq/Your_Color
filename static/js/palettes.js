@@ -32,6 +32,7 @@ likes.forEach((like) => {
         }
         el.classList.toggle("fa-solid")
         el.classList.toggle('fa-regular')
+        console.log(id_palette)
         xhr.send(JSON.stringify({"user_id": user_id, 'id_palette':id_palette , 'is_del': isDel}))
     })
 })

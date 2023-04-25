@@ -10,7 +10,11 @@
 
         </div>
         {% endfor %}
-        <i class="like fa-regular fa-heart"></i>
+        {% if palettes_ids[i] in liked_paletes %}
+        <i class="like fa-regular fa-heart" data-id="{{ palettes_ids[i] }}"></i>
+        {% else %}
+        <i class="like fa-solid fa-heart" data-id="{{ palettes_ids[i] }}"></i>
+        {% endif %}
     </div>
 
     {% endfor %}

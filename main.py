@@ -88,19 +88,17 @@ def liked_palettes():
         if request.method == 'POST':
             data = request.json
             if data:
-                palettes = Liked_palettes()
+                liked_palette = Liked_palettes()
+                id_palette = data['id_palette']
                 user_id = data['user_id']
-                id_palette = data['']
                 if data['is_del']:
-                    user = db_sess.query(Liked_palettes).filter(
-                        Liked_palettes.id_user == user_id).filter(
-                        Saved_plattes.colors == ''.join(data['colors'])).first()
-                    db_sess.delete(user)
+                    id_entry = db_sess.query(Liked_palettes).filter(Liked_palettes.id_palette == id_palette).first()
+                    db_sess.delete(id_entry)
                     db_sess.commit()
                 else:
-                    palettes.colors = colors
-                    palettes.id_user = int(user_id)
-                    db_sess.add(palettes)
+                    liked_palette.id_palette = id_palette
+                    liked_palette.id_user = user_id
+                    db_sess.add(liked_palette)
                     db_sess.commit()
     return ''
 
@@ -132,11 +130,16 @@ def saved():
 def best():
     db_session.global_init("db/blogs.db")
     db_sess = db_session.create_session()
-    palettes = db_sess.query(Saved_plattes).filter(Saved_plattes.date >= datetime.datetime.now() - datetime.timedelta(days=7)).all()
+    saved_palette = db_sess.query(Saved_plattes).filter(
+        Saved_plattes.date >= datetime.datetime.now() - datetime.timedelta(days=7)).all()
+    liked_palette = db_sess.query(Liked_palettes).filter(Liked_palettes.id_user == current_user.id).all()
+    palettes_liked = []
+    for like_pal in liked_palette:
+        palettes_liked.append(like_pal.id_palette)
     colors_hash = []
     palettes_ids = []
     flag = False
-    for color in palettes:
+    for color in saved_palette:
         palettes_ids.append(color.id)
         if color.colors.split('#'):
             colors_hash.append(color.colors.split('#')[1:])
@@ -146,7 +149,7 @@ def best():
     else:
         length = 0
     return render_template("best.html", colors_hash=colors_hash, palettes_ids=palettes_ids,
-                           len_colors=len(colors_hash), len_colors_elements=length )
+                           len_colors=len(colors_hash), len_colors_elements=length, liked_paletes=palettes_liked)
 
 
 @app.route('/userava')
