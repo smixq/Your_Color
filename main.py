@@ -1,16 +1,18 @@
-from flask import Flask, render_template, redirect, request, make_response, \
-    session
+import datetime
+import random
 
-from data import db_session
-from form.login import LoginForm
-from form.register import RegisterForm
-from form.profile import ProfileForm
+from flask import Flask, render_template, redirect, request, make_response
 from flask_login import LoginManager, login_user, login_required, logout_user, \
     current_user
-from data.user import User
-from data.saved_palettes import Saved_plattes
+from sqlalchemy import func
+
+from data import db_session
 from data.liked_palettes import Liked_palettes
-import datetime
+from data.saved_palettes import Saved_plattes
+from data.user import User
+from form.login import LoginForm
+from form.profile import ProfileForm
+from form.register import RegisterForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'asffsdfSDFASFKJFSADHFGJSDJFG'
@@ -85,23 +87,22 @@ def liked_palettes():
     db_session.global_init("db/blogs.db")
     db_sess = db_session.create_session()
     if request.method == 'POST':
-        if request.method == 'POST':
-            data = request.json
-            if data:
-                palettes = Liked_palettes()
-                user_id = data['user_id']
-                id_palette = data['']
-                if data['is_del']:
-                    user = db_sess.query(Liked_palettes).filter(
-                        Liked_palettes.id_user == user_id).filter(
-                        Saved_plattes.colors == ''.join(data['colors'])).first()
-                    db_sess.delete(user)
-                    db_sess.commit()
-                else:
-                    palettes.colors = colors
-                    palettes.id_user = int(user_id)
-                    db_sess.add(palettes)
-                    db_sess.commit()
+        data = request.json
+        if data:
+            liked_palette = Liked_palettes()
+            id_palette = data['id_palette']
+            user_id = data['user_id']
+            if data['is_del']:
+                id_entry = db_sess.query(Liked_palettes).filter(
+                    Liked_palettes.id_user == current_user.id).filter(
+                    Liked_palettes.id_palette == id_palette).first()
+                db_sess.delete(id_entry)
+                db_sess.commit()
+            else:
+                liked_palette.id_palette = id_palette
+                liked_palette.id_user = user_id
+                db_sess.add(liked_palette)
+                db_sess.commit()
     return ''
 
 
@@ -128,29 +129,70 @@ def saved():
                            len_colors=len(colors_hash), len_colors_elements=length)
 
 
+@app.route("/fresh")
+def fresh():
+    db_session.global_init("db/blogs.db")
+    db_sess = db_session.create_session()
+    saved_palette = db_sess.query(Saved_plattes).filter(
+        Saved_plattes.date >= datetime.datetime.now() - datetime.timedelta(days=7)).all()
+    liked_palette = db_sess.query(Liked_palettes).filter(
+        Liked_palettes.id_user == current_user.id).all()
+    count = db_sess.query(func.count(Liked_palettes.id_palette),
+                          Liked_palettes.id_palette).group_by(Liked_palettes.id_palette).all()
+    count_liked_palettes = {}
+
+    for i in count:
+        count_liked_palettes[int(i[1])] = i[0]
+    palettes_liked = []
+    for like_pal in liked_palette:
+        palettes_liked.append(int(like_pal.id_palette))
+    palettes_ids = {}
+    repeated = []
+    for i in range(20):
+        random_int = random.randint(0, len(saved_palette) - 1)
+        while random_int in repeated:
+            random_int = random.randint(0, len(saved_palette) - 1)
+        repeated.append(random_int)
+        palettes_ids[saved_palette[random_int].id] = saved_palette[random_int].colors.split('#')[1:]
+
+    return render_template("fresh.html", palettes_ids=palettes_ids, liked_paletes=palettes_liked,
+                           count_liked_palettes=count_liked_palettes)
+
+
 @app.route("/best")
 def best():
     db_session.global_init("db/blogs.db")
     db_sess = db_session.create_session()
-    palettes = db_sess.query(Saved_plattes).filter(Saved_plattes.date >= datetime.datetime.now() - datetime.timedelta(days=7)).all()
-    colors_hash = []
-    palettes_ids = []
-    flag = False
-    for color in palettes:
-        palettes_ids.append(color.id)
-        if color.colors.split('#'):
-            colors_hash.append(color.colors.split('#')[1:])
-            flag = True
-    if flag:
-        length = len(colors_hash[0])
-    else:
-        length = 0
-    return render_template("best.html", colors_hash=colors_hash, palettes_ids=palettes_ids,
-                           len_colors=len(colors_hash), len_colors_elements=length )
+    liked_palette = db_sess.query(Liked_palettes).filter(
+        Liked_palettes.id_user == current_user.id).all()
+    count = db_sess.query(func.count(Liked_palettes.id_palette),
+                          Liked_palettes.id_palette).group_by(Liked_palettes.id_palette).all()
+    count_liked_palettes = {}
+
+    for i in count:
+        count_liked_palettes[int(i[1])] = i[0]
+    count_liked_palettes = dict(sorted(count_liked_palettes.items(), key=lambda item: -item[1]))
+    palettes_liked = []
+    for like_pal in liked_palette:
+        palettes_liked.append(int(like_pal.id_palette))
+    palettes_ids = {}
+    print(count_liked_palettes)
+    saved_palette = db_sess.query(Saved_plattes).filter(Saved_plattes.id.in_(count_liked_palettes.keys())).all()
+
+    for i in count_liked_palettes.keys():
+        color_palette = ''
+        for el in saved_palette:
+            if el.id == i:
+                color_palette = el.colors.split('#')[1:]
+        palettes_ids[i] = color_palette
+
+    return render_template("best.html", palettes_ids=palettes_ids, liked_paletes=palettes_liked,
+                           count_liked_palettes=count_liked_palettes)
 
 
-@app.route('/userava')
-@login_required
+
+@ app.route('/userava')
+@ login_required
 def userava():
     img = current_user.avatar
     if not img:

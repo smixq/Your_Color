@@ -1,4 +1,4 @@
-let like = document.querySelector('.like')
+let like = document.querySelector('.fa-save')
 const col = document.querySelectorAll('.col')
 
 
@@ -15,7 +15,7 @@ like.addEventListener('click', (event) => {
     colors.push(text.textContent)
     })
     let isDel
-    if (el.classList.contains('fa-solid')) {
+    if (el.classList.contains('fas')) {
         isDel = true
 
     }
@@ -24,8 +24,8 @@ like.addEventListener('click', (event) => {
         isDel = false
     }
 //    console.log(isDel)
-    el.classList.toggle("fa-solid")
-    el.classList.toggle('fa-regular')
+    el.classList.toggle("fas")
+    el.classList.toggle('far')
     xhr.send(JSON.stringify({"user_id": user_id, 'colors': colors, 'is_del': isDel}))
 
 //    let id = el.dataset.id
@@ -66,9 +66,9 @@ document.addEventListener('keydown', (evt)=>{
 
     if(evt.code === 'Space'){
         evt.preventDefault()
-    if (like.classList.contains('fa-solid')) {
-        like.classList.toggle('fa-solid')
-        like.classList.toggle('fa-regular')
+    if (like.classList.contains('fas')) {
+        like.classList.toggle('fas')
+        like.classList.toggle('far')
     }
         setRandomColors()
     }
