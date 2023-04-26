@@ -72,11 +72,6 @@ nav {
     height: 100%;
 }
 
-.head_authorization {
-    text-align: center;
-    margin-top: 80px;
-}
-
 .nav_list {
     display: flex;
     align-items: center;
@@ -95,7 +90,7 @@ nav {
 .nav_link {
     text-transform: lowercase;
     font-variant: small-caps;
-    padding: 20px 10px 20px 10px;
+    padding: 1.6vh 5px;
 }
 
 .nav_link:hover {
@@ -203,13 +198,13 @@ nav {
     text-align: center;
 }
   
-/*.subtitle {
+.subtitle {
     color: #eee;
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     margin-top: 10px;
-}*/
+}
   
 .input-container {
     height: 50px;
@@ -329,4 +324,37 @@ nav {
 
 .edit_position_heading {
     margin-top: 100px;
+}
+
+.profile_container {
+    background: linear-gradient(45deg, #FC466B, #3F5EFB);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 93vh;
+}
+
+.profile {
+    width: 360px;
+    height: 600px;
+    background-color: #15172b;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.new_password_long {
+    width: 100px;
+}
+
+.confirm_password_long {
+    width: 135px;
+}
+
+.avatar_label {
+    color: #eee;
+    font-family: sans-serif;
+}
+
+.change_avatar_container {
+    margin-top: 25px;
 }

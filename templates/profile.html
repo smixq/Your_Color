@@ -1,38 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="head_authorization">Профиль</h1>
-<form action="" method="post" enctype="multipart/form-data">
+<div class="profile_container">
+<div class="profile">
+<div class="title">Профиль</div>
+<div class="avatar"></div>
+<form action="" method="post" enctype="multipart/form-data" class="form">
     {{ form.hidden_tag() }}
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(class="form-control", type="password") }}<br>
+    <p class="subtitle">Изменить пароль</p>
+    <div class="input-container ic2">
+        {{ form.password(id="firstname", class="input", type="password", placeholder=" ") }}
+        <div class="cut new_password_long"></div>
+        {{ form.password.label(for="firstname", class="placeholder",  text="Новый пароль") }}
         {% for error in form.password.errors %}
-            <p class="alert alert-danger" role="alert">
+            <div class="alert alert-danger" role="alert">
                 {{ error }}
-            </p>
+            </div>
         {% endfor %}
-    </p>
-    <p>
-        {{ form.password_again.label }}<br>
-        {{ form.password_again(class="form-control", type="password") }}<br>
+        </div>
+    <div class="input-container ic2">
+        {{ form.password_again(id="lastname", class="input", type="password", placeholder=" ") }}
+        <div class="cut confirm_password_long"></div>
+        {{ form.password.label(for="lastname", class="placeholder", text="Подтвердите пароль") }}
         {% for error in form.password_again.errors %}
-            <p class="alert alert-danger" role="alert">
+            <div class="alert alert-danger" role="alert">
                 {{ error }}
-            </p>
+            </div>
         {% endfor %}
-    </p>
+    </div>
 
-    <p>
-        {{ form.avatar.label }}<br>
-        {{ form.avatar(class="form-control-file", type="file") }}<br>
+    <div class="change_avatar_container">
+        {{ form.avatar.label(class="avatar_label") }}
+        {{ form.avatar(class="form-control-file", type="file") }}
         {% for error in form.avatar.errors %}
-            <p class="alert alert-danger" role="alert">
+            <div class="alert alert-danger" role="alert">
                 {{ error }}
-            </p>
+            </div>
         {% endfor %}
-    </p>
+    </div>
     <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
     {{message}}
 </form>
+</div>
+</div>
 {% endblock %}
