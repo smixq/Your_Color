@@ -8,7 +8,7 @@
     <div class="input-container ic1">
         {{ form.email(id="firstname", class="input", type="text", placeholder=" ") }}
         <div class="cut cut-short"></div>
-        {{ form.email.label(for="firstname", class="placeholder")}}
+        {{ form.email.label(for="firstname", class="placeholder", text="Почта")}}
 
         {% for error in form.email.errors %}
     <div class="alert alert-danger" role="alert">
@@ -26,7 +26,7 @@
     </div>
     {% endfor %}
     </div>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+    <p>{{ form.remember_me(class="remember_me") }} {{ form.remember_me.label(class="remember_me_label") }}</p>
     <p>{{ form.submit(type="submit", class="submit") }}</p>
 </form>
 </div>

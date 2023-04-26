@@ -11,7 +11,7 @@ html {
 }
 /* это колохоз потом надо править */
 .content {
-    height: 91vh;
+    height: 93vh;
     display: flex;
 }
 
@@ -29,7 +29,7 @@ html {
 }
 
 .header {
-    height: 9vh;
+    height: 7vh;
     background-color: hsla(336, 100%, 3%, 0.853);
 }
 
@@ -51,14 +51,6 @@ a {
     margin-top: 100px;
 }*/
 
-form {
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
-    margin-top: 30px;
-}
-
-
 .profile_avatar {
     width: 50px;
     height: 50px;
@@ -77,6 +69,7 @@ nav {
     /*background-color: hsla(336, 100%, 3%, 0.853);*/
     /*outline: 5px solid;*/
     padding-left: 40px;
+    height: 100%;
 }
 
 .head_authorization {
@@ -102,7 +95,7 @@ nav {
 .nav_link {
     text-transform: lowercase;
     font-variant: small-caps;
-    padding: 20px 10px 22px 10px;
+    padding: 20px 10px 20px 10px;
 }
 
 .nav_link:hover {
@@ -178,7 +171,6 @@ nav {
 .col button:hover{
     background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    
 }
 
 .btn-primary {
@@ -193,7 +185,7 @@ nav {
     background-color: #15172b;
     border-radius: 20px;
     box-sizing: border-box;
-    height: 500px;
+    height: 470px;
     padding: 20px;
     width: 320px;
 }
@@ -259,7 +251,7 @@ nav {
 }
   
 .cut-long {
-    width: 115px;
+    width: 120px;
 }
 
 .cut-short {
@@ -320,5 +312,21 @@ nav {
     background: linear-gradient(45deg, #FC466B, #3F5EFB);
     display: flex;
     justify-content: center;
-    height: 91vh;
+    height: 93vh;
+}
+
+.remember_me_label {
+    color: #eee;
+}
+
+.remember_me {
+    margin-top: 25px;
+}
+
+.edit_position_castle {
+    margin-bottom: 100px;
+}
+
+.edit_position_heading {
+    margin-top: 100px;
 }
