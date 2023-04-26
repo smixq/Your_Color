@@ -1,11 +1,11 @@
 import datetime
 import random
 
-from flask import Flask, render_template, redirect, request, make_response
+from flask import Flask, render_template, redirect, request, make_response, jsonify
 from flask_login import LoginManager, login_user, login_required, logout_user, \
     current_user
 from sqlalchemy import func
-
+from blueprints import random_palettes
 from data import db_session
 from data.liked_palettes import Liked_palettes
 from data.saved_palettes import Saved_plattes
@@ -13,7 +13,7 @@ from data.user import User
 from form.login import LoginForm
 from form.profile import ProfileForm
 from form.register import RegisterForm
-
+from flask import make_response
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'asffsdfSDFASFKJFSADHFGJSDJFG'
 login_manager = LoginManager()
@@ -26,8 +26,19 @@ def load_user(user_id):
     return db_sess.query(User).get(user_id)
 
 
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@app.errorhandler(400)
+def bad_request(_):
+    return make_response(jsonify({'error': 'Bad Request'}), 400)
+
+
 def main():
     db_session.global_init("db/blogs.db")
+    app.register_blueprint(random_palettes.blueprint)
     app.run(debug=True)
 
 
@@ -47,9 +58,15 @@ def delete_palettes():
         if request.method == 'POST':
             data = request.json
             if data:
-                palette = db_sess.query(Saved_plattes).filter(
+
+                saved_palette = db_sess.query(Saved_plattes).filter(
                     Saved_plattes.id == data['id_palettes']).first()
-                db_sess.delete(palette)
+                liked_palette = db_sess.query(Liked_palettes).filter(
+                    Liked_palettes.id_palette == data['id_palettes']).first()
+                if liked_palette:
+                    db_sess.delete(liked_palette)
+                db_sess.delete(saved_palette)
+
                 db_sess.commit()
 
     return ''
@@ -148,7 +165,11 @@ def fresh():
         palettes_liked.append(int(like_pal.id_palette))
     palettes_ids = {}
     repeated = []
-    for i in range(20):
+    if len(saved_palette) >= 20:
+        quantity = 20
+    else:
+        quantity = len(saved_palette)
+    for i in range(quantity):
         random_int = random.randint(0, len(saved_palette) - 1)
         while random_int in repeated:
             random_int = random.randint(0, len(saved_palette) - 1)
