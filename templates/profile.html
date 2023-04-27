@@ -4,8 +4,10 @@
 <div class="profile_container">
 <div class="profile">
 <div class="title">Профиль</div>
-<div class="avatar"></div>
-<form action="" method="post" enctype="multipart/form-data" class="form">
+<div class="avatar">
+    <img src="{{ url_for('static', filename='img/icoon.png') }}" width="80px" height="80px" class="avatar_icoon" alt="иконка профиля">
+</div>
+<form action="" method="post" enctype="multipart/form-data" class="form form_profile">
     {{ form.hidden_tag() }}
     <p class="subtitle">Изменить пароль</p>
     <div class="input-container ic2">
@@ -30,15 +32,16 @@
     </div>
 
     <div class="change_avatar_container">
-        {{ form.avatar.label(class="avatar_label") }}
-        {{ form.avatar(class="form-control-file", type="file") }}
+        <p class="subtitle">Изменить аватар</p>
+        <div class="avatar_label">{{ form.avatar.label }}</div>
+        <div>{{ form.avatar(class="form-control-file", type="file") }}</div>
         {% for error in form.avatar.errors %}
             <div class="alert alert-danger" role="alert">
                 {{ error }}
             </div>
         {% endfor %}
     </div>
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    <p>{{ form.submit(type="submit", class="submit") }}</p>
     {{message}}
 </form>
 </div>
