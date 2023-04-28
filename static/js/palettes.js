@@ -13,20 +13,17 @@ buttons.forEach((button) => {
         block.removeChild(palette)
     })
 })
-console.log(likes)
 likes.forEach((like) => {
     like.addEventListener('click', (event) => {
         let el = event.target
         let text = el.textContent
-
-
         const id_palette = event.target.dataset.id
         let user_id = document.querySelectorAll('.nav_action_item')[1].dataset.type
         let xhr = new XMLHttpRequest();
         xhr.open("POST", '/liked_palettes')
         xhr.withCredentials = true
         xhr.setRequestHeader('Content-Type', 'application/json')
-        let isDel
+        let isDel = false
         if (el.classList.contains('fa-solid')) {
             text = parseInt(text)
             isDel = true
@@ -38,7 +35,9 @@ likes.forEach((like) => {
 
             }
         }
+
         else {
+            isDel = false
             if (text){
                 text = parseInt(text)
                 el.textContent = text + 1
@@ -46,7 +45,6 @@ likes.forEach((like) => {
             else{
                 el.textContent = 1
             }
-                isDel = false
         }
         el.classList.toggle("fa-solid")
         el.classList.toggle('fa-regular')

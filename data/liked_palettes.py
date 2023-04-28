@@ -10,8 +10,8 @@ class Liked_palettes(SqlAlchemyBase):
     __tablename__ = 'liked_palettes'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
-    id_palette = sqlalchemy.Column(sqlalchemy.String, index=True, nullable=True)
-    id_user = sqlalchemy.Column(sqlalchemy.Integer, index=True, nullable=True)
+    id_palette = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    id_user = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
     # email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True, nullable=True)
     # hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)

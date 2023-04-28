@@ -14,6 +14,7 @@ from form.login import LoginForm
 from form.profile import ProfileForm
 from form.register import RegisterForm
 from flask import make_response
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'asffsdfSDFASFKJFSADHFGJSDJFG'
 login_manager = LoginManager()
@@ -44,8 +45,11 @@ def main():
 
 @app.route("/")
 def index():
-    params = {'link': 'css/styles_for_generate_plattes.css'}
-    return render_template("generate_palettes.html", **params)
+    return render_template("generate_palettes.html")
+
+@app.route("/about-us")
+def about_us():
+    return render_template("about_us.html")
 
 
 @app.route("/delete-palettes", methods=['POST'])
@@ -152,8 +156,7 @@ def fresh():
     db_sess = db_session.create_session()
     saved_palette = db_sess.query(Saved_plattes).filter(
         Saved_plattes.date >= datetime.datetime.now() - datetime.timedelta(days=7)).all()
-    liked_palette = db_sess.query(Liked_palettes).filter(
-        Liked_palettes.id_user == current_user.id).all()
+
     count = db_sess.query(func.count(Liked_palettes.id_palette),
                           Liked_palettes.id_palette).group_by(Liked_palettes.id_palette).all()
     count_liked_palettes = {}
@@ -161,8 +164,7 @@ def fresh():
     for i in count:
         count_liked_palettes[int(i[1])] = i[0]
     palettes_liked = []
-    for like_pal in liked_palette:
-        palettes_liked.append(int(like_pal.id_palette))
+
     palettes_ids = {}
     repeated = []
     if len(saved_palette) >= 20:
@@ -175,6 +177,11 @@ def fresh():
             random_int = random.randint(0, len(saved_palette) - 1)
         repeated.append(random_int)
         palettes_ids[saved_palette[random_int].id] = saved_palette[random_int].colors.split('#')[1:]
+    if current_user.is_authenticated:
+        liked_palette = db_sess.query(Liked_palettes).filter(
+            Liked_palettes.id_user == current_user.id).all()
+        for like_pal in liked_palette:
+            palettes_liked.append(int(like_pal.id_palette))
 
     return render_template("fresh.html", palettes_ids=palettes_ids, liked_paletes=palettes_liked,
                            count_liked_palettes=count_liked_palettes)
@@ -184,36 +191,42 @@ def fresh():
 def best():
     db_session.global_init("db/blogs.db")
     db_sess = db_session.create_session()
-    liked_palette = db_sess.query(Liked_palettes).filter(
-        Liked_palettes.id_user == current_user.id).all()
-    count = db_sess.query(func.count(Liked_palettes.id_palette),
-                          Liked_palettes.id_palette).group_by(Liked_palettes.id_palette).all()
-    count_liked_palettes = {}
 
-    for i in count:
+    palettes = db_sess.query(func.count(Liked_palettes.id_palette),
+                             Liked_palettes.id_palette).group_by(Liked_palettes.id_palette).all()
+    count_liked_palettes = {}
+    for i in palettes:
         count_liked_palettes[int(i[1])] = i[0]
     count_liked_palettes = dict(sorted(count_liked_palettes.items(), key=lambda item: -item[1]))
     palettes_liked = []
-    for like_pal in liked_palette:
-        palettes_liked.append(int(like_pal.id_palette))
-    palettes_ids = {}
-    print(count_liked_palettes)
-    saved_palette = db_sess.query(Saved_plattes).filter(Saved_plattes.id.in_(count_liked_palettes.keys())).all()
 
-    for i in count_liked_palettes.keys():
+    palettes_ids = {}
+    saved_palette = db_sess.query(Saved_plattes).filter(Saved_plattes.id.in_(count_liked_palettes.keys())).all()
+    if len(count_liked_palettes.keys()) >= 20:
+        quantity = 20
+    else:
+        quantity = len(count_liked_palettes.keys())
+    for i in range(quantity):
         color_palette = ''
         for el in saved_palette:
-            if el.id == i:
+            print(list(count_liked_palettes.keys()))
+            print(el.id == list(count_liked_palettes.keys())[i])
+            if el.id == list(count_liked_palettes.keys())[i]:
                 color_palette = el.colors.split('#')[1:]
-        palettes_ids[i] = color_palette
-
+                print(el.colors.split('#')[1:])
+        print(color_palette)
+        palettes_ids[list(count_liked_palettes.keys())[i]] = color_palette
+    if current_user.is_authenticated:
+        liked_palette = db_sess.query(Liked_palettes).filter(
+            Liked_palettes.id_user == current_user.id).all()
+        for like_pal in liked_palette:
+            palettes_liked.append(int(like_pal.id_palette))
     return render_template("best.html", palettes_ids=palettes_ids, liked_paletes=palettes_liked,
                            count_liked_palettes=count_liked_palettes)
 
 
-
-@ app.route('/userava')
-@ login_required
+@app.route('/userava')
+@login_required
 def userava():
     img = current_user.avatar
     if not img:
