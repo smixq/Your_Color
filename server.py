@@ -40,7 +40,7 @@ def bad_request(_):
 def main():
     db_session.global_init("db/blogs.db")
     app.register_blueprint(random_palettes.blueprint)
-    app.run(debug=True)
+    app.run()
 
 
 @app.route("/")
@@ -209,12 +209,8 @@ def best():
     for i in range(quantity):
         color_palette = ''
         for el in saved_palette:
-            print(list(count_liked_palettes.keys()))
-            print(el.id == list(count_liked_palettes.keys())[i])
             if el.id == list(count_liked_palettes.keys())[i]:
                 color_palette = el.colors.split('#')[1:]
-                print(el.colors.split('#')[1:])
-        print(color_palette)
         palettes_ids[list(count_liked_palettes.keys())[i]] = color_palette
     if current_user.is_authenticated:
         liked_palette = db_sess.query(Liked_palettes).filter(
