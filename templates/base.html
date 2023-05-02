@@ -45,10 +45,10 @@
             <ul class="nav_actions">
                 {% if current_user.is_authenticated %}
                 <li class="nav_action_item">
-                    <a href="/logout" class="nav_action_item_link">Выйти</a>
+                    <a href="/logout" class="nav_action_item_link"><span>Выйти</span></a>
                 </li>
                 <li class="nav_action_item" data-type="{{ current_user.id }}">
-                    <a href="/profile" class="nav_action_item_link">Профиль
+                    <a href="/profile" class="nav_action_item_link"><span>Профиль</span>
                     {% if current_user.avatar %}
                         <img src="{{ url_for('userava') }}" alt="1" class="profile_avatar">
                     {% else %}

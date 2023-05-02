@@ -29,8 +29,9 @@ html {
 }
 
 .header {
-    height: 7vh;
+    /* height: 7vh; */
     background-color: hsla(336, 100%, 3%, 0.853);
+    /* padding: 5px; */
 }
 
 ul {
@@ -51,25 +52,19 @@ a {
     margin-top: 100px;
 }*/
 
-.profile_avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    border: 3px solid white;
-
-}
 
 nav {
     display: flex;
-    flex: 1;
+    /* flex: 1; */
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     /* justify-content: flex-end; */
     /*background-color: hsla(336, 100%, 3%, 0.853);*/
     /*outline: 5px solid;*/
-    padding-left: 40px;
-    height: 100%;
+    /* padding-left: 40px; */
+    /* padding: 100px; */
+    /* height: 100%; */
 }
 
 .nav_list {
@@ -79,18 +74,21 @@ nav {
     justify-content: start;
     flex-direction: row;
     font-size: 22px;
-    flex-grow: 1;
+    /* flex-grow: 1; */
 }
 
 .nav_item {
-    display: inline-block;
-    padding: 20px 5px;
+    /* display: inline-block; */
+    /* padding: 20px 5px; */
 }
 
 .nav_link {
     text-transform: lowercase;
     font-variant: small-caps;
-    padding: 1.6vh 5px;
+    /* padding: 1.6vh 5px; */
+    padding: 20px;
+    display: inline-block;
+
 }
 
 .nav_link:hover {
@@ -115,6 +113,7 @@ nav {
     margin-left: 10px;
     padding-right: 10px;
     font-size: 22px;
+    /* line-height: 22px; */
     display: inline-block;
     text-transform: lowercase;
     font-variant: small-caps;
@@ -124,11 +123,36 @@ nav {
     box-shadow:0 0 15px 4px rgba(0, 0, 0, 0.137);
 }
 
+.nav_action_item:nth-child(2) a{
+    display: flex;
+    align-items: center;
+    padding-right: 60px;
+    position: relative;
+    /* padding: 0 20px; */
+}
+
 .nav_action_item_link {
+    
     padding: 10px 20px;
     background-color: #9e1390e3;
     border-radius: 25px;
+
 }
+
+
+
+.profile_avatar {
+    position: absolute;
+    /* display: inline-block; */
+    top:10%;
+    right: 10px;
+    /* width: 30px; */
+    height: 80%;
+    border-radius: 100%;
+    margin-left: 15px;
+    border: 3px solid white;
+}
+
 
 .col {
 
