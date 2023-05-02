@@ -25,7 +25,23 @@ html {
 .palettes{
     display: flex;
     flex-direction: row;
-    margin: 10px;
+}
+
+.palette_col {
+    width: 80px;
+    height: 150px;
+    text-align: center;
+}
+
+.pallet_container {
+    width: 440px;
+    height: 200px;
+    display: flex;
+    background-color: #15172b;
+    border-radius: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
 }
 
 .header {
@@ -94,7 +110,6 @@ nav {
 }
 
 .nav_link:hover {
-    /*color: rgba(240, 248, 255, 0.877);*/
     background-color: black;
 }
 
@@ -375,4 +390,10 @@ nav {
 .avatar_icoon {
     margin-top: 15px;
     margin-left: 130px;
+}
+
+.basic_design {
+    background: linear-gradient(45deg, #FC466B, #3F5EFB);
+    display: flex;
+    height: 97vh;
 }
