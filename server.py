@@ -8,12 +8,13 @@ from sqlalchemy import func
 from blueprints import random_palettes
 from data import db_session
 from data.liked_palettes import Liked_palettes
-from data.saved_palettes import Saved_plattes
+from data.saved_palettes import Saved_palettes
 from data.user import User
 from form.login import LoginForm
 from form.profile import ProfileForm
 from form.register import RegisterForm
 from flask import make_response
+from data.img import resize_img
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'asffsdfSDFASFKJFSADHFGJSDJFG'
@@ -63,8 +64,8 @@ def delete_palettes():
             data = request.json
             if data:
 
-                saved_palette = db_sess.query(Saved_plattes).filter(
-                    Saved_plattes.id == data['id_palettes']).first()
+                saved_palette = db_sess.query(Saved_palettes).filter(
+                    Saved_palettes.id == data['id_palettes']).first()
                 liked_palette = db_sess.query(Liked_palettes).filter(
                     Liked_palettes.id_palette == data['id_palettes']).first()
                 if liked_palette:
@@ -85,13 +86,13 @@ def add_favourite():
         if request.method == 'POST':
             data = request.json
             if data:
-                plattes = Saved_plattes()
+                plattes = Saved_palettes()
                 user_id = data['user_id']
                 colors = ''.join(data['colors'])
                 if data['is_del']:
-                    user = db_sess.query(Saved_plattes).filter(
-                        Saved_plattes.id_user == user_id).filter(
-                        Saved_plattes.colors == ''.join(data['colors'])).first()
+                    user = db_sess.query(Saved_palettes).filter(
+                        Saved_palettes.id_user == user_id).filter(
+                        Saved_palettes.colors == ''.join(data['colors'])).first()
                     db_sess.delete(user)
                     db_sess.commit()
                 else:
@@ -133,7 +134,7 @@ def saved():
     db_session.global_init("db/blogs.db")
     db_sess = db_session.create_session()
     user = db_sess.query(User).filter(User.id == current_user.id).first()
-    palettes = db_sess.query(Saved_plattes).filter(Saved_plattes.id_user == user.id).all()
+    palettes = db_sess.query(Saved_palettes).filter(Saved_palettes.id_user == user.id).all()
     colors_hash = []
     pallets_ids = []
     flag = False
@@ -154,8 +155,8 @@ def saved():
 def fresh():
     db_session.global_init("db/blogs.db")
     db_sess = db_session.create_session()
-    saved_palette = db_sess.query(Saved_plattes).filter(
-        Saved_plattes.date >= datetime.datetime.now() - datetime.timedelta(days=7)).all()
+    saved_palette = db_sess.query(Saved_palettes).filter(
+        Saved_palettes.date >= datetime.datetime.now() - datetime.timedelta(days=7)).all()
 
     count = db_sess.query(func.count(Liked_palettes.id_palette),
                           Liked_palettes.id_palette).group_by(Liked_palettes.id_palette).all()
@@ -201,7 +202,7 @@ def best():
     palettes_liked = []
 
     palettes_ids = {}
-    saved_palette = db_sess.query(Saved_plattes).filter(Saved_plattes.id.in_(count_liked_palettes.keys())).all()
+    saved_palette = db_sess.query(Saved_palettes).filter(Saved_palettes.id.in_(count_liked_palettes.keys())).all()
     if len(count_liked_palettes.keys()) >= 20:
         quantity = 20
     else:
@@ -238,7 +239,6 @@ def userava():
 def profile():
     form = ProfileForm()
     if form.validate_on_submit():
-
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.id == current_user.id).first()
         if form.password.data:
@@ -251,7 +251,9 @@ def profile():
             db_sess.commit()
         file = form.avatar.data
         if file:
-            user.avatar = file.read()
+            avatar = resize_img(file.read())
+            user.avatar = avatar
+
             db_sess.commit()
 
     return render_template('profile.html', title='Профиль', form=form)
