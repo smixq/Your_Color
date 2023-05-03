@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="background_main_content">
 <div class="palettes_content" id="best_content">
     {% for keys in palettes_ids.keys() %}
+    <div class="palett_container">
     <div class="palettes" id="{{ keys }}">
         {% for j in palettes_ids[keys] %}
         <div class="palette_col" style="background: #{{ j }}">
             #{{ j }}
         </div>
         {% endfor %}
+    </div>
         {% if keys in liked_paletes %}
         <i class="like fa-solid fa-heart" data-id="{{ keys }}">{{ count_liked_palettes[keys] }}</i>
         {% else %}
@@ -17,6 +20,7 @@
     </div>
 
     {% endfor %}
+</div>
 </div>
 
 <script src="{{ url_for('static', filename='js/palettes.js')}}"></script>

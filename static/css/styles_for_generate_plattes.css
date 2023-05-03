@@ -26,6 +26,30 @@ html {
     display: flex;
     flex-direction: row;
     margin: 10px;
+    height: 70%;
+}
+
+.palett_container {
+    background-color: #15172b;
+    height: 150px;
+    width: 360px;
+    display: flex;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin-top: 15px;
+}
+
+.palette_col {
+    text-align: center;
+    width: 68px;
+}
+
+.like {
+    position: relative;
+    top: 123px;
+    right: 350px;
+    color: white;
+    height: 20px;
 }
 
 .header {
@@ -399,4 +423,9 @@ nav {
 .avatar_icoon {
     margin-top: 15px;
     margin-left: 130px;
+}
+
+.background_main_content {
+    background: linear-gradient(45deg, #FC466B, #3F5EFB);
+    height: 97vh;
 }
