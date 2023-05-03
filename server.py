@@ -14,6 +14,7 @@ from form.login import LoginForm
 from form.profile import ProfileForm
 from form.register import RegisterForm
 from flask import make_response
+from data.img import resize_img
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'asffsdfSDFASFKJFSADHFGJSDJFG'
@@ -238,7 +239,6 @@ def userava():
 def profile():
     form = ProfileForm()
     if form.validate_on_submit():
-
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.id == current_user.id).first()
         if form.password.data:
@@ -251,7 +251,9 @@ def profile():
             db_sess.commit()
         file = form.avatar.data
         if file:
-            user.avatar = file.read()
+            avatar = resize_img(file.read())
+            user.avatar = avatar
+
             db_sess.commit()
 
     return render_template('profile.html', title='Профиль', form=form)
