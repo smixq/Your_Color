@@ -1,6 +1,7 @@
 import datetime
 import sqlalchemy
 from flask_login import UserMixin
+from sqlalchemy.util.preloaded import orm
 from sqlalchemy_serializer import SerializerMixin
 
 from .db_session import SqlAlchemyBase
@@ -15,6 +16,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     avatar = sqlalchemy.Column(sqlalchemy.BLOB, index=True, nullable=True)
     date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
+    liked_palettes = orm.relationship("Liked_palettes", back_populates='user')
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
