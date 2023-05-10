@@ -57,17 +57,25 @@
                     </a>
                 </li>
                 {% else %}
+                
                 <li class="nav_action_item">
                     <a href="{{url_for('reqister')}}" class="nav_action_item_link">Регистрация</a>
                 </li>
                 <li class="nav_action_item">
                     <a href="/login" class="nav_action_item_link">Вход</a>
                 </li>
+                <style scoped>
+                    .nav_action_item:nth-child(2) a{
+                        padding-right: 20px;
+                    }
+                </style>
                 {% endif %}
             </ul>
         </nav>
     </header>
     {% block content %}{% endblock %}
+
+    <footer>Lorem ipsum dolor sit amet.</footer>
 </body>
 
 </html>

@@ -5,15 +5,35 @@
     
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 100vh;
+}
+
+/* .main_content {
+    flex-grow: 4;
+} */
 
 html {
     font-family: 'Roboto', sans-serif;
 }
+
+section{
+    display: flex;
+    background: linear-gradient(45deg, #FC466B, #3F5EFB);
+    /* height: 97vh; */
+    background-size: cover;
+    background-attachment: fixed;
+    flex-grow: 4;
+    flex-shrink: 0;
+}
 /* это колохоз потом надо править */
-.content {
+/* .content {
     height: 93vh;
     display: flex;
-}
+} */
 
 .palettes_content{
     display: flex;
@@ -177,9 +197,21 @@ nav {
     border: 3px solid white;
 }
 
+.about_us {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.about_us h1 {
+    text-align: center;
+}
+
 
 .col {
-
+    align-self: stretch;
+    /* flex-grow: 1; */
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -420,12 +452,22 @@ nav {
     text-align: center;
 }
 
-.avatar_icoon {
-    margin-top: 15px;
-    margin-left: 130px;
+.avatar {
+    text-align: center;
 }
 
-.background_main_content {
-    background: linear-gradient(45deg, #FC466B, #3F5EFB);
-    height: 97vh;
+.avatar_icoon {
+    /* text-align: center; */
+    margin-top: 15px;
+    /* margin-left: 130px; */
 }
+
+.main_content {
+    background: linear-gradient(45deg, #FC466B, #3F5EFB);
+    /* height: 97vh; */
+    background-size: cover;
+    background-attachment: fixed;
+    flex-grow: 4;
+    flex-shrink: 0;
+}
+

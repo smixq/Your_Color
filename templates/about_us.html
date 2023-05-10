@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="background_main_content">
-<p>авторы:</p>
-<p>Саня Туров</p>
-<p>Михаил Игнатов</p>
-</div>
+<main class="main_content">
+    <div class="about_us">
+        <div class="creator_block">
+            <h1 class="creator_name">Турьев Александр</h1>
+            <img src="{{ url_for('static', filename='img/icoon.png') }}" alt="" class="img_creator">
+            <p class="about_creator">about creator</p>
+        </div>
+        <div class="creator_block">
+            <h1 class="creator_name">Игнатов Михаил</h1>
+            <img src="{{ url_for('static', filename='img/icoon.png') }}" alt="" class="img_creator">
+            <p class="about_creator">about creator</p>
+        </div>
+    </div>
+</main>
 {% endblock %}
