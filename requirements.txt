@@ -6,3 +6,4 @@ Werkzeug~=2.2.3
 WTForms~=3.0.1
 sqlalchemy_serializer==1.4.1
 email-validator==2.0.0.post2
+Pillow~=9.5.0
