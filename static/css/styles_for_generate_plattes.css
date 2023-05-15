@@ -64,7 +64,7 @@ section{
     width: 68px;
 }
 
-.like {
+.like, .disabled_like {
     position: relative;
     top: 123px;
     right: 350px;
