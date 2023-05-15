@@ -12,10 +12,14 @@
         </div>
         {% endfor %}
     </div>
+        {% if current_user.is_authenticated %}
         {% if keys in liked_paletes %}
         <i class="like fa-solid fa-heart" data-id="{{ keys }}">{{ count_liked_palettes[keys] }}</i>
         {% else %}
         <i class="like fa-regular fa-heart" data-id="{{ keys }}">{{ count_liked_palettes[keys] }}</i>
+        {% endif %}
+        {% else %}
+        <i class="disabled_like fa-regular fa-heart" data-id="{{ keys }}">{{ count_liked_palettes[keys] }}</i>
         {% endif %}
     </div>
 

@@ -208,6 +208,13 @@ nav {
     text-align: center;
 }
 
+.img_creator {
+    border-radius: 50%;
+    height: 300px;
+    width: auto;
+}
+
+
 
 .col {
     align-self: stretch;
