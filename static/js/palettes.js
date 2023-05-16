@@ -10,7 +10,7 @@ buttons.forEach((button) => {
         xhr.withCredentials = true
         xhr.setRequestHeader('Content-Type', 'application/json')
         xhr.send(JSON.stringify({'id_palettes': id_palettes}))
-        block.removeChild(palette)
+        palette.remove()
     })
 })
 likes.forEach((like) => {

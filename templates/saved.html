@@ -2,16 +2,24 @@
 
 {% block content %}
 <div class="main_content" id="favourite_content">
+    <div class="saved_palettes_content">
     {% for i in range(len_colors) %}
-    <div class="palettes" id="{{ palettes_ids[i] }}">
+    <div class="saved_pallete" id="{{ palettes_ids[i] }}">
+    <div class="saved_pallete_colors">
         {% for j in range(len_colors_elements) %}
-        <div class="favourite_cols" style="background: #{{ colors_hash[i][j] }}">
+        <div class="saved_cols" style="background: #{{ colors_hash[i][j] }}">
             #{{ colors_hash[i][j] }}
         </div>
+        
         {% endfor %}
-        <button data-id="{{ palettes_ids[i] }}" class="delete_favourite_button">delete</button>
+        <button data-id="{{ palettes_ids[i] }}" class="delete_favourite_button">Удалить</button>
+    </div>
+    
+    
     </div>
     {% endfor %}
+</div>
+</div>
 </div>
 
 <script src="{{ url_for('static', filename='js/palettes.js')}}"></script>
