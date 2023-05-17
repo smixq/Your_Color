@@ -2,19 +2,20 @@
 
 {% block content %}
 <div class="main_content" id="favourite_content">
-    <div class="saved_palettes_content">
+    <div class="palettes_content">
     {% for i in range(len_colors) %}
-    <div class="saved_pallete" id="{{ palettes_ids[i] }}">
-    <div class="saved_pallete_colors">
+    <div class="palett_container" id="{{ palettes_ids[i] }}">
+    <div class="palettes">
         {% for j in range(len_colors_elements) %}
         <div class="saved_cols" style="background: #{{ colors_hash[i][j] }}">
-            #{{ colors_hash[i][j] }}
+            
         </div>
         
         {% endfor %}
-        <button data-id="{{ palettes_ids[i] }}" class="delete_favourite_button">Удалить</button>
     </div>
+    <p><i data-id="{{ palettes_ids[i] }}" class="delete_favourite_button fa fa-trash"> </i></p>
     
+
     
     </div>
     {% endfor %}

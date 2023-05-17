@@ -65,24 +65,14 @@ section{
     border-radius: 10px;
     box-sizing: border-box;
     margin-top: 15px;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .delete_favourite_button{
-    border: 0;
-    padding: 5px;
     color: white;
-    position: relative;
-    top: 110px;
-    right: 340px;
-    /* display: block; */
-    background-color: #981cec;
+    justify-content: center;
     height: 30px;
-    border-radius: 3px;
-    transition: 0.3s ease;
-}
-
-.delete_favourite_button:hover{
-    background-color: #d295fa;
 }
 
 .saved_pallete_colors {
@@ -98,35 +88,47 @@ section{
     width: 68px;
 }
 
-.palettes{
-    display: flex;
-    flex-direction: row;
-    margin: 10px;
-    height: 70%;
-}
+
 
 .palett_container {
     background-color: #15172b;
     height: 150px;
-    width: 360px;
+    width: 20%;
     display: flex;
-    border-radius: 10px;
-    box-sizing: border-box;
+    border-radius: 7px;
+    /* border: 1px solid black; */
+    flex-direction: column;
+    justify-items: center;
     margin-top: 15px;
+    box-shadow: 0px 0px 3px 0px black;
+    overflow: hidden;
 }
 
+.palettes{
+    display: flex;
+    flex-direction: row;
+    /* margin: 10px; */
+    height: 80%;
+    width: 100%;
+    /* padding: 1px 1px; */
+
+}
 .palette_col {
     text-align: center;
-    width: 68px;
+    width: 20%;
+    /* width: 68px; */
 }
 
 .like, .disabled_like {
-    position: relative;
-    top: 123px;
-    right: 350px;
+    /* position: relative; */
+    /* top: 123px; */
+    /* right: 350px; */
     color: white;
-    height: 20px;
+    height: 20%;
+    /* align-self: center; */
+    /* height: 20px; */
 }
+
 
 .header {
     /* height: 7vh; */
@@ -189,7 +191,7 @@ nav {
     padding: 20px;
     display: inline-block;
     font-stretch:50%;
-
+    transition: 0.5s ease
 }
 
 .nav_link:hover {
@@ -251,7 +253,13 @@ nav {
     background-color: #9e1390e3;
     border-radius: 25px;
     font-stretch:50%;
+    transition: 0.5s ease;
 
+}
+
+.nav_action_item_link:hover {
+    /*color: rgba(240, 248, 255, 0.877);*/
+    background-color: #f925e4e3;
 }
 
 
@@ -588,11 +596,13 @@ h1 {
 }
 
 .main_content {
-    background: linear-gradient(45deg, #FC466B, #3F5EFB);
+    /* background: linear-gradient(45deg, #FC466B, #3F5EFB); */
+    background: linear-gradient(165deg, #ffc4c49c, #d89dff9e);
     /* height: 97vh; */
     background-size: cover;
     background-attachment: fixed;
     flex-grow: 4;
     flex-shrink: 0;
+    padding: 60px 0;
 }
 

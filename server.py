@@ -168,6 +168,7 @@ def fresh():
 
     palettes_ids = {}
     repeated = []
+    creators_names = {}
     if len(saved_palette) >= 20:
         quantity = 20
     else:
@@ -178,6 +179,7 @@ def fresh():
             random_int = random.randint(0, len(saved_palette) - 1)
         repeated.append(random_int)
         palettes_ids[saved_palette[random_int].id] = saved_palette[random_int].colors.split('#')[1:]
+        # creators_names[saved_palette[random_int].id] = saved_palette[random_int].name
     if current_user.is_authenticated:
         liked_palette = db_sess.query(Liked_palettes).filter(
             Liked_palettes.id_user == current_user.id).all()
