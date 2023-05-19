@@ -7,7 +7,7 @@
     <div class="palett_container">
     <div class="palettes" id="{{ keys }}">
         {% for j in palettes_ids[keys] %}
-        <div class="palette_col" style="background: #{{ j }}">
+        <div class="palette_col" style="background: #{{ j }}" data-id="{{ j }}">
         </div>
         {% endfor %}
     </div>
@@ -24,6 +24,9 @@
 
     {% endfor %}
 </div>
+<div class="toast toast_hide">
+    <div class="toast__body">Цвет скопирован</div>
+  </div>
 </div>
 
 <script src="{{ url_for('static', filename='js/palettes.js')}}"></script>

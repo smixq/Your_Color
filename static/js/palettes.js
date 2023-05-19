@@ -1,5 +1,9 @@
 let buttons = document.querySelectorAll('.delete_favourite_button')
 let likes = document.querySelectorAll('.like')
+let palette_col = document.querySelectorAll('.palette_col')
+let toast = document.querySelector('.toast')
+let toast__close = document.querySelector('.toast__close')
+
 buttons.forEach((button) => {
     button.addEventListener('click', (event) => {
         let block = document.getElementById('favourite_content')
@@ -51,3 +55,26 @@ likes.forEach((like) => {
         xhr.send(JSON.stringify({"user_id": user_id, 'id_palette':id_palette , 'is_del': isDel}))
     })
 })
+
+
+palette_col.forEach((col) =>{
+    col.addEventListener('click', (evt) => {
+        let el = evt.target
+        let text = el.dataset.id
+        navigator.clipboard.writeText("#" + text)
+        let classes = toast.classList
+        classes.remove('toast_hide')
+        toast.classList.remove('animation_hiding')
+        console.log(classes)
+        setTimeout(delete_window, 2000);
+        // toast.classList.toggle('toast_hide')
+    })
+})
+
+
+
+let delete_window = function() {
+    toast.classList.add('animation_hiding')
+}
+
+

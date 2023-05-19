@@ -7,7 +7,7 @@
     <div class="palett_container" id="{{ palettes_ids[i] }}">
     <div class="palettes">
         {% for j in range(len_colors_elements) %}
-        <div class="saved_cols" style="background: #{{ colors_hash[i][j] }}">
+        <div class="palette_col" style="background: #{{ colors_hash[i][j] }}" data-id="{{ colors_hash[i][j] }}">
             
         </div>
         
@@ -20,8 +20,11 @@
     </div>
     {% endfor %}
 </div>
+<div class="toast toast_hide">
+    <div class="toast__body">Цвет скопирован</div>
+  </div>
 </div>
-</div>
+
 
 <script src="{{ url_for('static', filename='js/palettes.js')}}"></script>
 {% endblock %}
