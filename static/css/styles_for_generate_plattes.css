@@ -11,6 +11,18 @@
     
 }
 
+@media screen and (max-width: 925px){
+    .nav_link {
+    font-size: 10px;
+}
+}
+@media screen and (max-width: 700px){
+    .nav_link {
+    font-size: 6px;
+}
+
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -21,7 +33,21 @@ body {
 /* .main_content {
     flex-grow: 4;
 } */
+footer{
+    background-color: hsla(336, 100%, 3%, 0.853);
 
+}
+
+.bottom_nav ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 30px
+    }
+
+.github_link {
+    color: white
+}
 html {
     font-family: 'Roboto', sans-serif;
 }
@@ -72,7 +98,7 @@ section{
 .delete_favourite_button{
     color: white;
     justify-content: center;
-    height: 30px;
+    height: 20px;
 }
 
 .saved_pallete_colors {
@@ -112,8 +138,14 @@ section{
     height: 80%;
     width: 100%;
     /* padding: 1px 1px; */
-
 }
+
+.palett_container p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px
+}
+
 .palette_col {
     text-align: center;
     width: 20%;
@@ -394,7 +426,7 @@ h1 {
     background-color: #15172b;
     border-radius: 20px;
     box-sizing: border-box;
-    height: 530px;
+
     padding: 20px;
     width: 320px;
 }
